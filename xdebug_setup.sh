@@ -104,9 +104,6 @@ touch /etc/tmpfiles.d/xdebug-cleanup.conf
 echo "d /tmp/xdebug 0777 root root 10m" >> /etc/tmpfiles.d/xdebug-cleanup.conf
 chmod 644 /etc/tmpfiles.d/xdebug-cleanup.conf
 
-cd ../
-rm -rf /tmp/xdebug_install
-
 if [ -f /usr/bin/dbgpProxy ]
 then
 	rm -f /usr/bin/dbgpProxy
@@ -137,5 +134,8 @@ chmod 644 /etc/supervisor/conf.d/dbgpProxy.conf
 
 supervisorctl reread
 supervisorctl update
+
+cd ../
+rm -rf /tmp/xdebug_install
 
 echo "done"
