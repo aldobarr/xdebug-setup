@@ -44,12 +44,20 @@ fi
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;")
 XDEBUG_INSTALL_DIR=$(php -r 'echo ini_get("extension_dir");')
 PHP_MODS_DIR="/etc/php/$PHP_VERSION/mods-available"
+
 XDEBUG_CONF="zend_extension = xdebug.so
 xdebug.mode = debug,trace
 xdebug.client_port = 9003
 xdebug.start_with_request = trigger
 xdebug.output_dir = /tmp/xdebug
 xdebug.log_level = 0"
+
+SUPERVISOR_CONF="[program:dbgpProxy]
+command=/usr/bin/dbgpProxy -s 127.0.0.1:9003
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/dbgpProxy.error
+stdout_logfile=/var/log/dbgpProxy.log"
 
 if [ ! -d $XDEBUG_INSTALL_DIR ]
 then
@@ -125,13 +133,6 @@ then
 	wget https://xdebug.org/files/binaries/dbgpProxy
 	chmod +x dbgpProxy
 	mv dbgpProxy /usr/bin/
-
-	SUPERVISOR_CONF="[program:dbgpProxy]
-	command=/usr/bin/dbgpProxy -s 127.0.0.1:9003
-	autostart=true
-	autorestart=true
-	stderr_logfile=/var/log/dbgpProxy.error
-	stdout_logfile=/var/log/dbgpProxy.log"
 
 	if [ -f /etc/supervisor/conf.d/dbgpProxy.conf ]
 	then
