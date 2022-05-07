@@ -1,6 +1,13 @@
 # xdebug-setup
 A shell script to automatically download and install xdebug on ubuntu. While it is possible to use this script to manually install any version of xdebug, this script is intended to setup xdebug version 3.0 and higher. For lower versions of xdebug it is recommended to use apt packages instead. If installing a version of xdebug lower than 3.0, you will need to modify the contents of xdebug.ini that gets placed in your mods-available folder to conform to the older config.
 
+It is assumed that php is already installed prior to running this script.
+
+## Tested On
+* Debian 11
+* Debian 10
+* Ubuntu 20.04
+
 # Settings
 This script installs xdebug with the following settings by default:
 ```
