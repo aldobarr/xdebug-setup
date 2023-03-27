@@ -46,7 +46,7 @@ XDEBUG_INSTALL_DIR=$(php -r 'echo ini_get("extension_dir");')
 PHP_MODS_DIR="/etc/php/$PHP_VERSION/mods-available"
 
 XDEBUG_CONF="zend_extension = xdebug.so
-xdebug.mode = debug,trace
+xdebug.mode = debug
 xdebug.client_port = 9003
 xdebug.start_with_request = trigger
 xdebug.output_dir = /tmp/xdebug
